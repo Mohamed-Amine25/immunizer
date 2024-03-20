@@ -60,7 +60,7 @@ services:
       - 47500:47500
       - 49112:49112
   immunizer-microservices:
-    build: https://raw.githubusercontent.com/oiraqi/immunizer/master/docker/Microservices-Dockerfile
+    build: https://raw.githubusercontent.com/Mohamed-Amine25/immunizer-test/master/docker/docker-compose.yml
     container_name: immunizer-microservices
     tty: true
     depends_on:
@@ -70,7 +70,7 @@ services:
     volumes:
       - spark-jobs:/root/data
   immunizer-agents:
-    build: https://raw.githubusercontent.com/oiraqi/immunizer/master/docker/Ofbiz-Dockerfile
+    build: https://github.com/Mohamed-Amine25/immunizer-test/blob/master/docker/Ofbiz-Dockerfile
     container_name: immunizer-microagents
     ports:
       - 8443:8443

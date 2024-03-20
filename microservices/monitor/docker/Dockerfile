@@ -23,8 +23,8 @@ RUN apt-get install -qy curl
 WORKDIR /root
 RUN curl -O https://downloads.apache.org/spark/spark-2.4.5/spark-2.4.5-bin-hadoop2.7.tgz
 RUN tar -xvzf spark-2.4.5-bin-hadoop2.7.tgz
-RUN git clone --progress --verbose https://github.com/oiraqi/immunizer-monitor.git
-RUN git clone --progress --verbose https://github.com/oiraqi/immunizer-analyze.git
+RUN git clone --progress --verbose https://github.com/Mohamed-Amine25/immunizer-test.git
+RUN git clone --progress --verbose https://github.com/Mohamed-Amine25/immunizer-test.git
 WORKDIR /root/immunizer-monitor/scripts
 RUN ./build.sh
 WORKDIR /root
