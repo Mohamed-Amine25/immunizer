@@ -1,85 +1,85 @@
-version: '2.0'
+  version: '2.0'
 
-services:
-  zookeeper:
-    image: bitnami/zookeeper
-    container_name: zookeeper
-    ports:
-      - 2181:2181
-    volumes:
-      - zookeeper_data:/cluster
-    environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
-  kafka:
-    image: bitnami/kafka
-    container_name: kafka
-    ports:
-      - 9092:9092
-      - 29092:29092
-    volumes:
-      - kafka_data:/cluster
-    environment:
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
-      - ALLOW_PLAINTEXT_LISTENER=yes
-      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,PLAINTEXT_HOST://:29092
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
-    depends_on: 
-      - zookeeper
-  spark-master:
-    image: bde2020/spark-master:2.4.5-hadoop2.7
-    container_name: spark-master
-    volumes:
-      - spark-jobs:/data
-      - ../../microservices/monitoring/framework/build/libs:/libs
-    ports:
-      - 8080:8080
-      - 7077:7077
-    environment:
-      - INIT_DAEMON_STEP=setup_spark  
-  spark-worker-1:
-    image: bde2020/spark-worker:2.4.5-hadoop2.7
-    container_name: spark-worker-1
-    depends_on:
-      - spark-master
-    volumes:
-      - spark-jobs:/data
-      - ../../microservices/monitoring/framework/build/libs:/libs
-    ports:
-      - 8081:8081
-    environment:
-      - "SPARK_MASTER=spark://spark-master:7077"
-  ignite:
-    image: apacheignite/ignite:2.8.0
-    container_name: ignite
-    environment:
-      - IGNITE_QUIET=false
-    ports:
-      - 11211:11211
-      - 47100:47100
-      - 47500:47500
-      - 49112:49112
-  immunizer-microservices:
-    build: https://raw.githubusercontent.com/Mohamed-Amine25/immunizer-test/master/docker/docker-compose.yml
-    container_name: immunizer-microservices
-    tty: true
-    depends_on:
-      - kafka
-      - spark-master
-      - ignite
-    volumes:
-      - spark-jobs:/root/data
-  immunizer-agents:
-    build: https://raw.githubusercontent.com/Mohamed-Amine25/immunizer-test/3322d65a5f2eb3b3b05df933726f6c641d9f499b/docker/Ofbiz-Dockerfile
-    container_name: immunizer-microagents
-    ports:
-      - 8443:8443
-    tty: true
-    depends_on:
-      - kafka
-volumes:
-  zookeeper_data:
-    driver: local
-  kafka_data:
-    driver: local
-  spark-jobs:
+  services:
+    zookeeper:
+      image: bitnami/zookeeper
+      container_name: zookeeper
+      ports:
+        - 2181:2181
+      volumes:
+        - zookeeper_data:/cluster
+      environment:
+        - ALLOW_ANONYMOUS_LOGIN=yes
+    kafka:
+      image: bitnami/kafka
+      container_name: kafka
+      ports:
+        - 9092:9092
+        - 29092:29092
+      volumes:
+        - kafka_data:/cluster
+      environment:
+        - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+        - ALLOW_PLAINTEXT_LISTENER=yes
+        - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+        - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,PLAINTEXT_HOST://:29092
+        - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      depends_on: 
+        - zookeeper
+    spark-master:
+      image: bde2020/spark-master:2.4.5-hadoop2.7
+      container_name: spark-master
+      volumes:
+        - spark-jobs:/data
+        - ../../microservices/monitoring/framework/build/libs:/libs
+      ports:
+        - 8080:8080
+        - 7077:7077
+      environment:
+        - INIT_DAEMON_STEP=setup_spark  
+    spark-worker-1:
+      image: bde2020/spark-worker:2.4.5-hadoop2.7
+      container_name: spark-worker-1
+      depends_on:
+        - spark-master
+      volumes:
+        - spark-jobs:/data
+        - ../../microservices/monitoring/framework/build/libs:/libs
+      ports:
+        - 8081:8081
+      environment:
+        - "SPARK_MASTER=spark://spark-master:7077"
+    ignite:
+      image: apacheignite/ignite:2.8.0
+      container_name: ignite
+      environment:
+        - IGNITE_QUIET=false
+      ports:
+        - 11211:11211
+        - 47100:47100
+        - 47500:47500
+        - 49112:49112
+    immunizer-microservices:
+      build: https://raw.githubusercontent.com/Mohamed-Amine25/immunizer-test/master/docker/docker-compose.yml
+      container_name: immunizer-microservices
+      tty: true
+      depends_on:
+        - kafka
+        - spark-master
+        - ignite
+      volumes:
+        - spark-jobs:/root/data
+    immunizer-agents:
+      build: https://raw.githubusercontent.com/Mohamed-Amine25/immunizer-test/3322d65a5f2eb3b3b05df933726f6c641d9f499b/docker/Ofbiz-Dockerfile
+      container_name: immunizer-microagents
+      ports:
+        - 8443:8443
+      tty: true
+      depends_on:
+        - kafka
+  volumes:
+    zookeeper_data:
+      driver: local
+    kafka_data:
+      driver: local
+    spark-jobs:
