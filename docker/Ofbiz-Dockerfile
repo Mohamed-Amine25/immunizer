@@ -20,10 +20,10 @@ RUN apt-get install -qy vim
 RUN apt-get install -qy zip unzip
 RUN apt-get install -qy git
 WORKDIR /root
-RUN git clone --progress --verbose https://github.com/oiraqi/immunizer.git
-WORKDIR /root/immunizer/microagents/sensor/scripts
+RUN git clone --progress --verbose https://github.com/Mohamed-Amine25/immunizer-test.git
+WORKDIR /root/immunizer-test/microagents/sensor/scripts
 RUN ./build.sh
-WORKDIR /root/immunizer/microagents/effector/scripts
+WORKDIR /root/immunizer-test/microagents/effector/scripts
 RUN ./build.sh
 WORKDIR /root
 RUN git clone --progress --verbose https://github.com/apache/ofbiz-framework.git
