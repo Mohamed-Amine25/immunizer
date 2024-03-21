@@ -1,3 +1,3 @@
 cd ../framework
-./gradlew clean build
+./gradlew clean build --stacktrace
 ./gradlew libs
