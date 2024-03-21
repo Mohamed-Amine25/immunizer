@@ -1,3 +1,3 @@
 cd ../framework
-./gradlew build
+./gradlew clean build
 ./gradlew libs
