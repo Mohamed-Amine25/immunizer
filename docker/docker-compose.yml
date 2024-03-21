@@ -70,7 +70,7 @@ services:
     volumes:
       - spark-jobs:/root/data
   immunizer-agents:
-    build: https://raw.githubusercontent.com/Mohamed-Amine25/immunizer/3322d65a5f2eb3b3b05df933726f6c641d9f499b/docker/Ofbiz-Dockerfile
+    build: https://raw.githubusercontent.com/Mohamed-Amine25/immunizer/master/docker/Ofbiz-Dockerfile
     container_name: immunizer-microagents
     ports:
       - 8443:8443
