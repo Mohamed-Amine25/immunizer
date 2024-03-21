@@ -23,8 +23,8 @@ RUN apt-get install -qy curl
 WORKDIR /root
 RUN curl -O https://downloads.apache.org/spark/spark-3.5.1/spark-3.5.1-bin-hadoop3.tgz
 RUN tar -xvzf spark-3.5.1-bin-hadoop3.tgz
-RUN git clone --progress --verbose https://github.com/Mohamed-Amine25/immunizer-test.git
-WORKDIR /root/immunizer-test/microservices/monitor/scripts
+RUN git clone --progress --verbose https://github.com/Mohamed-Amine25/immunizer.git
+WORKDIR /root/immunizer/microservices/monitor/scripts
 RUN ./build.sh
 WORKDIR /root
 
