@@ -6,7 +6,7 @@ LABEL maintainer="Omar Iraqi"
 
 # extra metadata
 LABEL version="1.0"
-LABEL description="Docker Image for Ubuntu, OpenJDK 8 and Immunizer Monitoring Microservice"
+LABEL description="Docker Image for Ubuntu, OpenJDK 11 and Immunizer Monitoring Microservice"
 
 # update sources list
 RUN apt-get clean
@@ -14,7 +14,7 @@ RUN apt-get update
 RUN apt-get install -y --no-install-recommends apt-utils
 
 # install required software, one per line for better caching
-RUN apt-get install -qy openjdk-8-jdk
+RUN apt-get install -qy openjdk-11-jdk
 RUN apt-get install -qy locales
 RUN apt-get install -qy vim
 RUN apt-get install -qy zip unzip

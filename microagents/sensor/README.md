@@ -26,7 +26,7 @@ All dependencies are managed through Docker and Gradle. Docker is all what you n
 
 ## Current Environment / Docker Image
 - Linux Ubuntu 18.04 (Bionic)
-- OpenJDK 8
+- OpenJDK 11
 - ByteBuddy 1.10.3
 - Gson 2.8.6
 - Apache Kafka Clients API 2.4.0
