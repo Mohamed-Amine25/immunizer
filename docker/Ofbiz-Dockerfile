@@ -26,12 +26,7 @@ RUN ./build.sh
 WORKDIR /root/immunizer/microagents/effector/scripts
 RUN ./build.sh
 WORKDIR /root
-RUN apt-get install -qy openjdk-17-jdk
-RUN git clone --progress --verbose https://github.com/apache/ofbiz-framework.git
-WORKDIR /root/ofbiz-framework
-RUN ./gradlew cleanAll loadAll --info --stacktrace --debug
-RUN ./gradlew jar
-WORKDIR /root
+
 
 # cleanup
 RUN apt-get -qy autoremove
