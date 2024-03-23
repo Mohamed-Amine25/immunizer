@@ -9,7 +9,8 @@ public class EntryAdvice {
 
     @Advice.OnMethodEnter
     public static Invocation onEnter(
-            /* @Advice.This Object object, */@Advice.Origin String fullyQualifiedMethodName,
+            /* @Advice.This Object object, */
+            @Advice.Origin String fullyQualifiedMethodName,
             @Advice.AllArguments Object[] params) {
 
         String label = "Genuine";
