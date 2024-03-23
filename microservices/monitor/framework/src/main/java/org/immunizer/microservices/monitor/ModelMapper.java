@@ -110,7 +110,7 @@ public class ModelMapper implements FlatMapFunction<byte[], String> {
 		if (invocation.get("cxid").getAsString() != null) {
 			prefix += '_' + invocation.get("cxid").getAsString();
 		}
-		context = prefix + '_' + callStackId;
+		context = prefix + "_" + callStackId;
 		model.put("contexts_" + context, "");
 		contextOccurences = contextsCountsCache.get(context);
 		minPathOccurences = new long[numberOfParams + 1];
