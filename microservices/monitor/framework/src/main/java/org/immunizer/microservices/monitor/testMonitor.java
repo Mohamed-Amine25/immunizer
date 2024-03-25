@@ -1,6 +1,7 @@
 package main.java.org.immunizer.microservices.monitor;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.immunizer.microservices.monitor.testModelMapper;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -33,13 +34,10 @@ try (KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props)) {
         for (ConsumerRecord<String, String> record : records) {
            // Process the record and use Ignite cache
                     // Example: Cache the record value with the record key
-                    cache.put(record.key(), record.value());
-        
-                    // Example: Retrieve and process data from the cache
-                    Object cachedValue = cache.get(record.key());
-                    System.out.printf("Cached value for key %s: %s%n", record.key(), cachedValue);
-                    // Add further processing logic as needed
-        }
+                    if (record!=null) {
+                        testModelMapper(record.key(), record.value());
+                    }                   
+      }
     }
 }
 }
